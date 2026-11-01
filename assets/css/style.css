@@ -1,0 +1,36 @@
+/* Página de login: formulário estreito e centrado */
+.login {
+  max-width: 420px;
+}
+
+/* Uma cor por estado: o cartão define a cor, a borda e o badge usam-na */
+.tarefa {
+  border-left: 6px solid var(--cor-estado);
+}
+
+.tarefa .estado {
+  background-color: var(--cor-estado);
+}
+
+.tarefa--pendente {
+  --cor-estado: #b45309; /* laranja */
+}
+
+.tarefa--em_andamento {
+  --cor-estado: #1d4ed8; /* azul */
+}
+
+.tarefa--concluida {
+  --cor-estado: #15803d; /* verde */
+}
+
+.tarefa--concluida h3 {
+  text-decoration: line-through;
+}
+
+/* Telemóveis pequenos: um botão por linha */
+@media (max-width: 575.98px) {
+  .botoes {
+    flex-direction: column;
+  }
+}
