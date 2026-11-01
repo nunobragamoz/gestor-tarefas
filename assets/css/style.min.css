@@ -1,0 +1,1 @@
+.login{max-width:420px}.tarefa{border-left:6px solid var(--cor-estado)}.tarefa .estado{background-color:var(--cor-estado)}.tarefa--pendente{--cor-estado:#b45309}.tarefa--em_andamento{--cor-estado:#1d4ed8}.tarefa--concluida{--cor-estado:#15803d}.tarefa--concluida h3{text-decoration:line-through}@media (max-width:575.98px){.botoes{flex-direction:column}}
