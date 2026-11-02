@@ -13,7 +13,7 @@ $password = (string) ($dados["password"] ?? "");
 
 $utilizador = (new UtilizadorDAO())->procurarPorEmail($email);
 
-// A mesma mensagem nos dois casos: não revela se o email existe
+// de propósito a mesma mensagem se o email ou a password estiverem errados, para não dar a perceber que emails é que têm conta
 if ($utilizador === null || !$utilizador->verificarPassword($password)) {
   responder(401, ["erro" => "erro.login"]);
 }

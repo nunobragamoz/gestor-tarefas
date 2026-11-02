@@ -27,6 +27,7 @@ if ($metodo === "POST" || $metodo === "PUT") {
 
   $erros = $tarefa->validar();
   if ($erros) {
+    // 422 = os dados vieram inválidos (não é "não encontrado" nem erro do servidor)
     responder(422, ["erros" => $erros]);
   }
   if ($metodo === "POST") {

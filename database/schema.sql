@@ -10,6 +10,7 @@ CREATE TABLE utilizadores (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
   email VARCHAR(150) NOT NULL UNIQUE,
+  -- guardo só o hash, nunca a password. Se alguém roubar a BD, não fica com as passwords
   password_hash VARCHAR(255) NOT NULL
 );
 
@@ -20,7 +21,7 @@ CREATE TABLE tarefas (
   descricao TEXT,
   data_conclusao DATE NOT NULL,
   estado ENUM('pendente', 'em_andamento', 'concluida') NOT NULL DEFAULT 'pendente',
-  -- Cada tarefa pertence a um utilizador; se o utilizador for apagado, as tarefas também
+  -- apagar o utilizador apaga logo as tarefas dele, assim não ficam tarefas sem dono
   FOREIGN KEY (utilizador_id) REFERENCES utilizadores(id) ON DELETE CASCADE,
   INDEX (utilizador_id)
 );

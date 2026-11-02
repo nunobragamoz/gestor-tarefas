@@ -23,6 +23,7 @@ class TarefaDAO
     );
     $stmt->execute([$utilizadorId]);
     $tarefas = $stmt->fetchAll();
+    // o Apache corre com outro utilizador, por isso a pasta cache/ precisa de chmod 777 para o PHP poder gravar aqui
     file_put_contents($cache, json_encode($tarefas, JSON_UNESCAPED_UNICODE));
     return $tarefas;
   }
@@ -91,7 +92,7 @@ class TarefaDAO
     return __DIR__ . "/../../cache/tarefas_" . $utilizadorId . ".json";
   }
 
-  // Sempre que os dados mudam, a cache antiga é apagada
+  // apago a cache sempre que algo muda, senão a lista continuava a mostrar dados antigos
   private function limparCache(int $utilizadorId): void
   {
     $cache = $this->ficheiroCache($utilizadorId);

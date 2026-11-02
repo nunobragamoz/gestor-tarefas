@@ -28,7 +28,7 @@ if (empty($_SESSION["csrf"])) {
 
 // ---------- Idioma, tema e textos ----------
 
-// Idioma escolhido no cookie "idioma" (por omissão: português)
+// Idioma guardado num cookie, e não na sessão, para aguentar o logout e a próxima visita (o cookie dura 1 ano). Por omissão, pt
 function idioma(): string
 {
   return ($_COOKIE["idioma"] ?? "pt") === "en" ? "en" : "pt";
@@ -54,13 +54,13 @@ function t(string $chave): string
   return textos()[$chave] ?? $chave;
 }
 
-// e() escapa o texto antes de o pôr no HTML: <b> aparece como texto (proteção XSS)
+// e() escapa o texto antes de ir para o HTML: um <script> aparece como texto e nunca corre (XSS)
 function e(string $texto): string
 {
   return htmlspecialchars($texto, ENT_QUOTES, "UTF-8");
 }
 
-// Usa a versão .min do CSS/JS se existir; ?v= muda quando o ficheiro muda (cache do browser)
+// Usa o .min se existir. O browser guarda o ficheiro e só volta a descarregá-lo quando o ?v= muda (ou seja, quando o ficheiro muda)
 function asset(string $caminho): string
 {
   $min = preg_replace('/\.(css|js)$/', '.min.$1', $caminho);
@@ -88,7 +88,7 @@ function responder(int $codigo, array $dados = []): never
   exit;
 }
 
-// Devolve o id do utilizador autenticado; sem login responde 401
+// Versão para a API: devolve o id de quem está autenticado; sem sessão responde 401 (não iniciou sessão)
 function exigirLogin(): int
 {
   if (!isset($_SESSION["utilizador_id"])) {

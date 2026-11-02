@@ -26,7 +26,7 @@ class Tarefa
     );
   }
 
-  // Devolve os erros [campo => chave de tradução]; array vazio = tarefa válida
+  // devolve as chaves de tradução dos erros (ex.: "erro.titulo"), não o texto, para servir em PT e EN. Vazio = está tudo bem
   public function validar(): array
   {
     $erros = [];

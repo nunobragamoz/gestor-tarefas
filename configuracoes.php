@@ -12,11 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   // Só aceita valores conhecidos (nunca grava o que o utilizador escreveu)
   $idioma = ($_POST["idioma"] ?? "") === "en" ? "en" : "pt";
   $tema = ($_POST["tema"] ?? "") === "escuro" ? "escuro" : "claro";
+  // os cookies vão nos cabeçalhos HTTP, por isso tenho de os gravar aqui, antes de imprimir qualquer HTML
   $opcoes = ["expires" => time() + 60 * 60 * 24 * 365, "path" => "/", "httponly" => true, "samesite" => "Lax"];
   setcookie("idioma", $idioma, $opcoes);
   setcookie("tema", $tema, $opcoes);
 
-  // POST → redirecionar → GET: recarregar a página não volta a enviar o formulário
+  // gravo e redireciono (POST-Redirect-GET): assim, se fizer refresh, o formulário não é reenviado
   header("Location: configuracoes.php?guardado=1");
   exit;
 }

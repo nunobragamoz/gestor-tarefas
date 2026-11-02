@@ -153,7 +153,7 @@ if (formTarefa) {
 
   document.getElementById('botao-cancelar').addEventListener('click', modoCriar)
 
-  // Um só "ouvinte" para os botões de todos os cartões (delegação de eventos)
+  // um só ouvinte na lista apanha os cliques dos botões de todos os cartões. Como os cartões são recriados a cada carregar(), pôr um ouvinte em cada um deixaria de funcionar
   lista.addEventListener('click', async (evento) => {
     const botao = evento.target.closest('button[data-acao]')
     if (!botao) return
